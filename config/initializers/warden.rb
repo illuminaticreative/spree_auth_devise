@@ -7,7 +7,9 @@ Warden::Manager.after_set_user except: :fetch do |user, auth, opts|
         user.last_incomplete_spree_order.empty!
       end
 
-      old_order.associate_user!(user)
+      if old_order.present?
+      	old_order.associate_user!(user)
+      end
     end
   end
 end
